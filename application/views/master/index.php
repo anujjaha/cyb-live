@@ -16,6 +16,20 @@ function direct_verify_job(id) {
 			 }
           });
 }
+function simple_verify_job(id) {
+	$("#verify_"+id).html("Verified");
+	
+	$.ajax({
+         type: "POST",
+         url: "<?php echo site_url();?>/ajax/ajax_job_verify/"+id, 
+         data:{"job_id":id,"notes":"Verified by Master"},
+         success: 
+              function(data){
+					//location.reload();
+					return true;
+			 }
+          });
+}
 </script>
 <section class="content">
 <!-- Small boxes (Stat box) -->
@@ -83,7 +97,8 @@ function direct_verify_job(id) {
 		<td><a class="fancybox"  onclick="show_job_details(<?php echo $job['job_id'];?>);" href="#view_job_details">View</a></td>
 		<td>
 			<span id="verify_<?php echo $job['job_id'];?>">
-				<a href="javascript:void(0);" onclick="direct_verify_job(<?php echo $job['job_id'];?>)">Verify</a>
+				<a href="javascript:void(0);" onclick="simple_verify_job(<?php echo $job['job_id'];?>)">Verify</a>
+				<a href="javascript:void(0);" onclick="direct_verify_job(<?php echo $job['job_id'];?>)">Verify & Search</a>
 			</span>
 		</td>
 		</tr>
